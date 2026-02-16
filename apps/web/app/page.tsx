@@ -1,16 +1,21 @@
-import { Button } from "@workspace/ui/components/button";
-import { add } from "@workspace/math/add";
+"use client";
 
+import { api } from "@workspace/backend/_generated/api";
+import { Button } from "@workspace/ui/components/button";
+import { useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 export default function Page() {
+  const users = useQuery(api.users.getAllUser);
+  const addUser = useMutation(api.users.addUsers);
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">App/Web</h1>
-        <div className="flex gap-2">
-          <Button>Button</Button>
-          <Button variant="outline">Outline</Button>
-          <p>{add(2, 8)}</p>
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-svh">
+      <div>
+        <h2>app/web</h2>
+      </div>
+
+      <div className="flex flex-col max-w-sm wfull">
+        <Button onClick={() => addUser()}>Add</Button>
+        {JSON.stringify(users, null, 2)}
       </div>
     </div>
   );
