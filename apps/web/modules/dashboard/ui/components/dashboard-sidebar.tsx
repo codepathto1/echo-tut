@@ -29,6 +29,7 @@ import {
   SidebarMenuButton,
 } from "@workspace/ui/components/sidebar";
 import { TooltipProvider } from "@workspace/ui/components/tooltip";
+import { cn } from "@workspace/ui/lib/utils";
 
 const customerSupportItems = [
   {
@@ -68,7 +69,7 @@ const accountItems = [
   },
   {
     title: "Billing",
-    url: "/billing",
+    url: "/billings",
     icon: CreditCardIcon,
   },
 ];
@@ -114,7 +115,14 @@ export const DashboardSidebar = () => {
               {customerSupportItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <TooltipProvider>
-                    <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
+                    <SidebarMenuButton
+                      className={cn(
+                        isActive(item.url) &&
+                          "bg-linear-to-b from-sidebar-primary to-[#3e8bf5]! text=sidebar-primary-foreground! hover:to-[#3e8bf5]/90!",
+                      )}
+                      asChild
+                      isActive={isActive(item.url)}
+                      tooltip={item.title}>
                       <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
@@ -135,7 +143,13 @@ export const DashboardSidebar = () => {
               {confirgurationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <TooltipProvider>
-                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <SidebarMenuButton
+                      className={cn(
+                        isActive(item.url) &&
+                          "bg-linear-to-b from-sidebar-primary to-[#3e8bf5]! text-sidebar-foreground@ hover:to-[#3e8bf5]/90!",
+                      )}
+                      asChild
+                      isActive={isActive(item.url)}>
                       <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
@@ -156,7 +170,14 @@ export const DashboardSidebar = () => {
               {accountItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <TooltipProvider>
-                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive(item.url)}
+                      tooltip={item.title}
+                      className={cn(
+                        isActive(item.url) &&
+                          "bg-linear-to-b from-sidebar-primary to-[#3e8bf5] text-sidebar-foreground! hover:to-[#3e8bf5]/90! ",
+                      )}>
                       <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
