@@ -7,17 +7,15 @@ export const getAllUser = query({
   },
 });
 
-export const addUsers = mutation({
-  handler: async (ctx) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (identity === null) {
-      throw new Error("Not authenticated");
-    }
-    const orgId = identity.orgId as string;
-    if (!orgId) {
-      throw new Error("Missing organization");
-    }
-    throw new Error("Testing Error Handling ");
-    ctx.db.insert("users", { name: "Jason" });
-  },
-});
+// export const addUsers = mutation({
+//   handler: async (ctx) => {
+//     const identity = await ctx.auth.getUserIdentity();
+//     if (identity) {
+//       ctx.db.insert("users", { name: "Jason" });
+//     }
+//     const orgId = identity?.orgId as string;
+//     if (!orgId) {
+//       throw new Error("Missing organization");
+//     }
+//   },
+// });
