@@ -10,7 +10,7 @@ export const WidgetFooter = () => {
         <HomeIcon className={cn("size-5", screen === "selection" && "text-primary")} />
       </Button>
       <Button className="h-14 rounded-none flex-1" variant="ghost">
-        <InboxIcon className={cn("size-5", screen === "message" && "text-primary")} />
+        <InboxIcon className={cn("size-5 text-primary")} />
       </Button>
     </footer>
   );
