@@ -13,6 +13,8 @@ import { Doc } from "@workspace/backend/_generated/dataModel";
 
 import { api } from "@workspace/backend/_generated/api";
 import { useMutation } from "convex/react";
+import { useAtomValue, useSetAtom } from "jotai";
+import { contactSessionIdFamily, organizationIdAtom } from "../../atoms/screen-atom";
 
 const formSchema = z.object({
   name: z.string().min(3, "Name is required"),
@@ -20,9 +22,11 @@ const formSchema = z.object({
 });
 
 //Temporary fix before implementing actual one
-const organizationId = "123";
+// const organizationId = "123";
 
 export const WidgetAuthScreen = () => {
+  const organizationId = useAtomValue(organizationIdAtom);
+  const setContactSessionId = useSetAtom(contactSessionIdFamily(organizationId || ""));
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,7 +53,8 @@ export const WidgetAuthScreen = () => {
       referrer: document.referrer || "direct",
     };
     const contactSessionId = await createContactSession({ ...data, organizationId, metadata });
-    console.log(contactSessionId);
+    // console.log(contactSessionId);
+    setContactSessionId(contactSessionId);
   };
   return (
     <>
